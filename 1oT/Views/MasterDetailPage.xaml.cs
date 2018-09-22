@@ -20,15 +20,15 @@ namespace _1oT.Views
 {
     public sealed partial class MasterDetailPage : Page, INotifyPropertyChanged
     {
-        private SampleOrder _selected;
+        private SimCard _selected;
 
-        public SampleOrder Selected
+        public SimCard Selected
         {
             get { return _selected; }
             set { Set(ref _selected, value); }
         }
 
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<SimCard> SimCards { get; private set; } = new ObservableCollection<SimCard>();
 
         public MasterDetailPage()
         {
@@ -36,20 +36,20 @@ namespace _1oT.Views
             Loaded += MasterDetailPage_Loaded;
         }
 
-        private async void MasterDetailPage_Loaded(object sender, RoutedEventArgs e)
+        private void MasterDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
-            SampleItems.Clear();
-
-            var data = await SampleDataService.GetSampleModelDataAsync();
-
-            foreach (var item in data)
+            SimCards.Clear();
+            var dataService = new DataService();
+            var getSims = dataService.GetSimCards();
+            
+            foreach (var item in getSims.sims)
             {
-                SampleItems.Add(item);
+                SimCards.Add(item);
             }
 
             if (MasterDetailsViewControl.ViewState == MasterDetailsViewState.Both)
             {
-                Selected = SampleItems.First();
+                Selected = SimCards.First();
             }
         }
 

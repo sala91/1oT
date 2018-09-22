@@ -52,7 +52,16 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
-
+            <TextBlock
+                    x:Uid="Settings_Api_Credentials"
+                    Style="{StaticResource SubtitleTextBlockStyle}"/>
+            <TextBlock
+                    x:Uid="Settings_Api_Credentials_Guide"
+                    Margin="{StaticResource EightTopMargin}"
+                    TextWrapping="Wrap"/>
+            <TextBox Width="300" x:Name="apiUserName" Text="API Username" HorizontalAlignment="Left" />
+			<TextBox Width="300" Name="apiPassWord" Text="API Password" HorizontalAlignment="Left" />
+            <Button Width="300" Name="saveApi" Content="Save" Click="saveApi_Click"/>
             <TextBlock
                     x:Uid="Settings_About"
                     Style="{StaticResource SubtitleTextBlockStyle}"/>
@@ -62,7 +71,8 @@
                     Text="{x:Bind VersionDescription, Mode=OneWay}" />
                 <TextBlock
                     x:Uid="Settings_AboutDescription"
-                    Margin="{StaticResource EightTopMargin}" />
+                    Margin="{StaticResource EightTopMargin}"
+                    TextWrapping="Wrap"/>
 
                 <HyperlinkButton
                     x:Uid="Settings_PrivacyTermsLink" 

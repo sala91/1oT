@@ -13,38 +13,35 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,8,0,0">
                 <FontIcon
                     FontSize="40"
-                    Glyph="{x:Bind MasterMenuItem.Symbol, Mode=OneWay}"
+                    FontFamily="Segoe MDL2 Assets"
+                    Glyph="&#xF080;"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"/>
                 <TextBlock
                     Margin="12,0,0,0"
-                    Text="{x:Bind MasterMenuItem.Company, Mode=OneWay}"
+                    Text="{x:Bind MasterMenuItem.iccid, Mode=OneWay}"
                     Style="{StaticResource SubheaderTextBlockStyle}" />
             </StackPanel>
             <StackPanel Name="block" Padding="0,15,0,0">
-                <TextBlock Text="Status" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <TextBlock Text="{x:Bind MasterMenuItem.Status, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-                <TextBlock Text="Order date" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
-                <TextBlock Text="{x:Bind MasterMenuItem.OrderDate, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-                <TextBlock Text="Company" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
-                <TextBlock Text="{x:Bind MasterMenuItem.Company, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-                <TextBlock Text="Ship to" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
-                <TextBlock Text="{x:Bind MasterMenuItem.ShipTo, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-                <TextBlock Text="Order total" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
-                <TextBlock Text="{x:Bind MasterMenuItem.OrderTotal, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-
-                <TextBlock Text="Note 1" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,16,0,0" />
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />
-
-                <TextBlock Text="Note 2" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,16,0,0" />
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />
-
-                <TextBlock Text="Note 3" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,16,0,0" />
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />
-
-                <TextBlock Text="Note 4" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,16,0,0" />
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,24" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />
+                <TextBlock Text="Status primary" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.status.primary, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Status secondary" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.status.secondary, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Group" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.group, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Name" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.name, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Type" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.type, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Form" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,0"/>
+                <TextBlock Text="{x:Bind MasterMenuItem.form, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Data limit" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,16,0,0" />
+                <TextBox Text="{x:Bind MasterMenuItem.data_limit, Mode=TwoWay}" Style="{StaticResource BodyTextBlockStyle}" />
             </StackPanel>
+
+            <Button Width="200" Name="saveButton" Content="Save data limit" Margin="5" Click="saveDataLimit_Click"/>
+            <Button Width="200" Name="deactivateButton" Content="Deactivate" Margin="5" Click="deactivate_Click"/>
+            <Button Width="200" Name="activateButton" Content="Activate" Margin="5" Click="activate_Click"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

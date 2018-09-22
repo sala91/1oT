@@ -47,6 +47,20 @@ namespace _1oT.Views
         private void Initialize()
         {
             VersionDescription = GetVersionDescription();
+
+            try
+            {
+                Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                apiUserName.Text = localSettings.Values["apiUsername"].ToString();
+                apiPassWord.Text = localSettings.Values["apiPassword"].ToString();
+
+            }
+            catch (Exception)
+            {
+                // Die silently, no settings have been made yet
+            }
+
         }
 
         private string GetVersionDescription()
@@ -83,5 +97,15 @@ namespace _1oT.Views
         }
 
         private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void saveApi_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;           
+            localSettings.Values["apiUsername"] = apiUserName.Text;
+            localSettings.Values["apiPassword"] = apiPassWord.Text;
+            var dataService = new DataService();
+            dataService.Authorize();
+        }
     }
 }

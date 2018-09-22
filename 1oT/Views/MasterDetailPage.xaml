@@ -15,16 +15,21 @@
         </TransitionCollection>
     </Page.Transitions>
     <Page.Resources>
-        <DataTemplate x:Key="ItemTemplate" x:DataType="model:SampleOrder">
+        <DataTemplate x:Key="ItemTemplate" x:DataType="model:SimCard">
             <Grid Height="64" Padding="0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <FontIcon Grid.Column="0" FontSize="40" Glyph="{x:Bind Symbol}" VerticalAlignment="Center" />
+                <FontIcon
+                    FontSize="40"
+                    FontFamily="Segoe MDL2 Assets"
+                    Glyph="&#xED2A;"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
                 <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind Company}" Style="{ThemeResource ListTitleStyle}"/>
-                    <TextBlock Text="{x:Bind Status}" Style="{StaticResource ListSubTitleStyle}"/>
+                    <TextBlock Text="{x:Bind iccid}" Style="{ThemeResource ListTitleStyle}"/>
+                    <TextBlock Text="{x:Bind status.primary}" Style="{StaticResource ListSubTitleStyle}"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -41,7 +46,7 @@
     <Grid x:Name="ContentArea">
         <controls:MasterDetailsView
             x:Name="MasterDetailsViewControl"
-            ItemsSource="{x:Bind SampleItems}"
+            ItemsSource="{x:Bind SimCards}"
             SelectedItem="{x:Bind Selected, Mode=TwoWay}"
             ItemTemplate="{StaticResource ItemTemplate}"
             DetailsTemplate="{StaticResource DetailsTemplate}"
