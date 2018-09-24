@@ -7,12 +7,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using RestSharp;
 using _1oT.Models;
+using Microsoft.Extensions.Logging;
 
 namespace _1oT.Services
 {
     public class DataService
     {
-
+        readonly ILogger<DataService> logger;
         Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
@@ -39,14 +40,18 @@ namespace _1oT.Services
                     model = JsonConvert.DeserializeObject<Authorize>(response.Content);
                     localSettings.Values["apiToken"] = model.access_token;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: Notify user of IP error (most likely)
+                    logger.LogInformation("Did we have IP Access?");
+                    logger.LogError(ex.Message);
+                    logger.LogDebug(ex.StackTrace);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Die silently, no settings have been made yet
+                logger.LogInformation("Mostlikely bad credentials");
+                logger.LogError(ex.Message);
+                logger.LogDebug(ex.StackTrace);
             }
         }
 
@@ -69,16 +74,20 @@ namespace _1oT.Services
                     model = JsonConvert.DeserializeObject<ManageSims>(response.Content);
                     return model;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: Notify user of IP error (most likely)
+                    logger.LogInformation("Did we have IP Access?");
+                    logger.LogError(ex.Message);
+                    logger.LogDebug(ex.StackTrace);
                     return model;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Die silently, no settings have been made yet
+                logger.LogInformation("Mostlikely bad credentials");
+                logger.LogError(ex.Message);
+                logger.LogDebug(ex.StackTrace);
                 return model;
             }
         }
@@ -102,16 +111,20 @@ namespace _1oT.Services
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
                     return model;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: Notify user of IP error (most likely)
+                    logger.LogInformation("Did we have IP Access?");
+                    logger.LogError(ex.Message);
+                    logger.LogDebug(ex.StackTrace);
                     return model;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Die silently, no settings have been made yet
+                logger.LogInformation("Mostlikely bad credentials");
+                logger.LogError(ex.Message);
+                logger.LogDebug(ex.StackTrace);
                 return model;
             }
         }
@@ -135,16 +148,20 @@ namespace _1oT.Services
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
                     return model;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: Notify user of IP error (most likely)
+                    logger.LogInformation("Did we have IP Access?");
+                    logger.LogError(ex.Message);
+                    logger.LogDebug(ex.StackTrace);
                     return model;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Die silently, no settings have been made yet
+                logger.LogInformation("Mostlikely bad credentials");
+                logger.LogError(ex.Message);
+                logger.LogDebug(ex.StackTrace);
                 return model;
             }
         }
@@ -169,16 +186,20 @@ namespace _1oT.Services
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
                     return model;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: Notify user of IP error (most likely)
+                    logger.LogInformation("Did we have IP Access?");
+                    logger.LogError(ex.Message);
+                    logger.LogDebug(ex.StackTrace);
                     return model;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Die silently, no settings have been made yet
+                logger.LogInformation("Mostlikely bad credentials");
+                logger.LogError(ex.Message);
+                logger.LogDebug(ex.StackTrace);
                 return model;
             }
         }

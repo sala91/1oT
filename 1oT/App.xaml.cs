@@ -1,7 +1,8 @@
 ﻿using System;
-
 using _1oT.Services;
-
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Windows.Storage;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 
@@ -26,6 +27,21 @@ namespace _1oT
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
+            // Create IOC container and add logging feature to it.
+            IServiceCollection services = new ServiceCollection();
+            services.AddLogging();
+
+            // Build provider to access the logging service.
+            IServiceProvider provider = services.BuildServiceProvider();
+
+            // UWP is very restrictive of where you can save files on the disk.
+            // The preferred place to do that is app's local folder.
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            string fullPath = $"{folder.Path}\\Logs\\App.log";
+
+            // Tell the logging service to use Serilog.File extension.
+            provider.GetService<ILoggerFactory>().AddFile(fullPath);
+
             if (!args.PrelaunchActivated)
             {
                 await ActivationService.ActivateAsync(args);
