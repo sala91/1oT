@@ -16,3 +16,4 @@ For developing
 
 Dev notes
 * Temporary workaround for loading Manage SIM page on not supported Windows 10 installations removes the FontFamily="Segoe MDL2 Assets" usage.
+* logs are saved in the folder:  C: \ Users \ [user_name] \ AppData \ Local \ Packages \ [package_family_name] \ LocalState \ MetroLogs

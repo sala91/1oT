@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Net;
-using System.IO;
 using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using RestSharp;
 using _1oT.Models;
-using Microsoft.Extensions.Logging;
+using MetroLog;
+using MetroLog.Targets;
 
 namespace _1oT.Services
 {
     public class DataService
     {
-        readonly ILogger<DataService> logger;
+        private ILogger logger = LogManagerFactory.DefaultLogManager.GetLogger<DataService>();
         Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
@@ -21,17 +17,20 @@ namespace _1oT.Services
         {
             string localApiUserName = string.Empty;
             string localApiPasword = string.Empty;
-            try
+            string refreshToken = string.Empty;
+            localApiUserName = localSettings.Values["apiUsername"].ToString();
+            localApiPasword = localSettings.Values["apiPassword"].ToString();
+            refreshToken = localSettings.Values["refreshToken"].ToString();
+
+            if (localApiUserName != string.Empty && localApiPasword != string.Empty)
             {
-                localApiUserName = localSettings.Values["apiUsername"].ToString();
-                localApiPasword = localSettings.Values["apiPassword"].ToString();
                 var client = new RestClient("https://api.terminal.1ot.mobi/v1/");
                 var request = new RestRequest("oauth/token", Method.POST);
                 request.AddParameter("grant_type", "password");
                 request.AddParameter("username", localApiUserName);
                 request.AddParameter("client_id", localApiUserName);
                 request.AddParameter("password", localApiPasword);
-                request.AddParameter("refresh_token", "");
+                request.AddParameter("refresh_token", refreshToken);
                 IRestResponse response = client.Execute(request);
                 try
                 {
@@ -42,16 +41,14 @@ namespace _1oT.Services
                 }
                 catch (Exception ex)
                 {
-                    logger.LogInformation("Did we have IP Access?");
-                    logger.LogError(ex.Message);
-                    logger.LogDebug(ex.StackTrace);
+                    logger.Info("Did we have IP Access? Authorize Call");
+                    logger.Error(ex.Message);
+                    logger.Debug(ex.StackTrace);
+
+
+                    logger.Info("Rerfreshing token just in case");
+                    localSettings.Values["refreshToken"] = "1";
                 }
-            }
-            catch (Exception ex)
-            {
-                logger.LogInformation("Mostlikely bad credentials");
-                logger.LogError(ex.Message);
-                logger.LogDebug(ex.StackTrace);
             }
         }
 
@@ -70,24 +67,26 @@ namespace _1oT.Services
                 IRestResponse response = client.Execute(request);
                 try
                 {
-                    // Update apitoken, everything supergud now
                     model = JsonConvert.DeserializeObject<ManageSims>(response.Content);
+                    if (model == null)
+                    {
+                        localSettings.Values["refreshToken"] = "1";
+                    }
                     return model;
                 }
                 catch (Exception ex)
                 {
-                    logger.LogInformation("Did we have IP Access?");
-                    logger.LogError(ex.Message);
-                    logger.LogDebug(ex.StackTrace);
+                    logger.Info("Did we have IP Access? GetSimCards");
+                    logger.Error(ex.Message);
+                    logger.Debug(ex.StackTrace);
                     return model;
                 }
-
             }
             catch (Exception ex)
             {
-                logger.LogInformation("Mostlikely bad credentials");
-                logger.LogError(ex.Message);
-                logger.LogDebug(ex.StackTrace);
+                logger.Info("Mostlikely bad credentials GetSimCards");
+                logger.Error(ex.Message);
+                logger.Debug(ex.StackTrace);
                 return model;
             }
         }
@@ -107,24 +106,26 @@ namespace _1oT.Services
                 IRestResponse response = client.Execute(request);
                 try
                 {
-                    // Update apitoken, everything supergud now
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
+                    if (model == null)
+                    {
+                        localSettings.Values["refreshToken"] = "1";
+                    }
                     return model;
                 }
                 catch (Exception ex)
                 {
-                    logger.LogInformation("Did we have IP Access?");
-                    logger.LogError(ex.Message);
-                    logger.LogDebug(ex.StackTrace);
+                    logger.Info("Did we have IP Access? ActivateSimCard");
+                    logger.Error(ex.Message);
+                    logger.Debug(ex.StackTrace);
                     return model;
                 }
-
             }
             catch (Exception ex)
             {
-                logger.LogInformation("Mostlikely bad credentials");
-                logger.LogError(ex.Message);
-                logger.LogDebug(ex.StackTrace);
+                logger.Info("Mostlikely bad credentials ActivateSimCard");
+                logger.Error(ex.Message);
+                logger.Debug(ex.StackTrace);
                 return model;
             }
         }
@@ -143,25 +144,27 @@ namespace _1oT.Services
                 request.AddParameter("iccid", iccid);
                 IRestResponse response = client.Execute(request);
                 try
-                {
-                    // Update apitoken, everything supergud now
+                {                    
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
+                    if (model == null)
+                    {
+                        localSettings.Values["refreshToken"] = "1";
+                    }
                     return model;
                 }
                 catch (Exception ex)
                 {
-                    logger.LogInformation("Did we have IP Access?");
-                    logger.LogError(ex.Message);
-                    logger.LogDebug(ex.StackTrace);
+                    logger.Info("Did we have IP Access? DeActivateSimCard");
+                    logger.Error(ex.Message);
+                    logger.Debug(ex.StackTrace);
                     return model;
                 }
-
             }
             catch (Exception ex)
             {
-                logger.LogInformation("Mostlikely bad credentials");
-                logger.LogError(ex.Message);
-                logger.LogDebug(ex.StackTrace);
+                logger.Info("Mostlikely bad credentials DeActivateSimCard");
+                logger.Error(ex.Message);
+                logger.Debug(ex.StackTrace);
                 return model;
             }
         }
@@ -182,24 +185,26 @@ namespace _1oT.Services
                 IRestResponse response = client.Execute(request);
                 try
                 {
-                    // Update apitoken, everything supergud now
                     model = JsonConvert.DeserializeObject<SimCard>(response.Content);
+                    if (model == null)
+                    {
+                        localSettings.Values["refreshToken"] = "1";
+                    }
                     return model;
                 }
                 catch (Exception ex)
                 {
-                    logger.LogInformation("Did we have IP Access?");
-                    logger.LogError(ex.Message);
-                    logger.LogDebug(ex.StackTrace);
+                    logger.Info("Did we have IP Access? SetDataLimit");
+                    logger.Error(ex.Message);
+                    logger.Debug(ex.StackTrace);
                     return model;
                 }
-
             }
             catch (Exception ex)
             {
-                logger.LogInformation("Mostlikely bad credentials");
-                logger.LogError(ex.Message);
-                logger.LogDebug(ex.StackTrace);
+                logger.Info("Mostlikely bad credentials SetDataLimit");
+                logger.Error(ex.Message);
+                logger.Debug(ex.StackTrace);
                 return model;
             }
         }

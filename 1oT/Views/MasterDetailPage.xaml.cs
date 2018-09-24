@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using _1oT.Models;
 using _1oT.Services;
-
+using MetroLog;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 
 using Windows.UI.Xaml;
@@ -21,6 +21,7 @@ namespace _1oT.Views
     public sealed partial class MasterDetailPage : Page, INotifyPropertyChanged
     {
         private SimCard _selected;
+        private ILogger logger = LogManagerFactory.DefaultLogManager.GetLogger<DataService>();
 
         public SimCard Selected
         {
@@ -41,16 +42,23 @@ namespace _1oT.Views
             SimCards.Clear();
             var dataService = new DataService();
             var getSims = dataService.GetSimCards();
-            
-            foreach (var item in getSims.sims)
+            try
             {
-                SimCards.Add(item);
+                foreach (var item in getSims.sims)
+                {
+                    SimCards.Add(item);
+                }
+
+                if (MasterDetailsViewControl.ViewState == MasterDetailsViewState.Both)
+                {
+                    Selected = SimCards.First();
+                }
+            }
+            catch (Exception)
+            {
+                logger.Error("No sims to present... Maybe api keys missing/expired or not set up yet");
             }
 
-            if (MasterDetailsViewControl.ViewState == MasterDetailsViewState.Both)
-            {
-                Selected = SimCards.First();
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
