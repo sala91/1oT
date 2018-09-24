@@ -11,12 +11,12 @@
     <ScrollViewer Name="ForegroundElement" VerticalScrollMode="Enabled" HorizontalAlignment="Stretch" Padding="12,0">
         <StackPanel HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,8,0,0">
-                <FontIcon
+                <!--<FontIcon
                     FontSize="40"
                     FontFamily="Segoe MDL2 Assets"
                     Glyph="&#xF080;"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center"/>-->
                 <TextBlock
                     Margin="12,0,0,0"
                     Text="{x:Bind MasterMenuItem.iccid, Mode=OneWay}"

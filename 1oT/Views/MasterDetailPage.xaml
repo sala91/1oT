@@ -21,12 +21,12 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <FontIcon
+                <!--<FontIcon
                     FontSize="40"
                     FontFamily="Segoe MDL2 Assets"
                     Glyph="&#xED2A;"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center"/>-->
                 <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
                     <TextBlock Text="{x:Bind iccid}" Style="{ThemeResource ListTitleStyle}"/>
                     <TextBlock Text="{x:Bind status.primary}" Style="{StaticResource ListSubTitleStyle}"/>

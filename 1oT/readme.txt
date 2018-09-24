@@ -8,3 +8,11 @@ Features
 * Capability to manage SIM cards data limit, activate and deactivate them
 
 
+Minimum requierments
+* Windows 10, version 1803 (April 2018 Update) or later - https://support.microsoft.com/en-au/help/4028685/windows-10-get-the-update
+
+For developing
+* Visual Studio 2017 (You will also need the optional Universal Windows Platform development workload)
+
+Dev notes
+* Temporary workaround for loading Manage SIM page on not supported Windows 10 installations removes the FontFamily="Segoe MDL2 Assets" usage.
